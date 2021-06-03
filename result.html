@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+        }
+        body.dark {
+            background-color: #30333b;
+        }
+        .container {
+            margin: auto;
+            max-width: 1200px;
+        }
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .theme {
+            background-color: inherit;
+            border: none;
+            padding: 0;
+            outline: none;
+            margin-left: 40px;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #727386;
+        }
+        .theme:first-child {
+            margin-left: 0;
+        }
+        .theme:hover {
+            color: #43699d;
+            box-shadow: 0 5px 0 #abc5f1;
+        }
+        body.dark .theme:hover {
+            color: #a6a5b7;
+            box-shadow: 0 5px 0 #a6a5b7;
+        }
+        .content {
+            text-align: center;
+        }
+        h2 {
+            color: #a575ba;
+            font-size: 50px;
+            margin-top: 10%;
+        }
+        #result {
+            margin: 7% 0;
+            font-size: 70px;
+            color: #40c5b8;
+        }
+        .btn{
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: block;
+            background-color: #6daacb;
+            padding: 15px 100px;
+            border-radius: 1px;
+            max-width: 600px;
+
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 40px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .btn:hover {
+            background-color: #6999b3;
+        }
+        body.dark .btn {
+            background-color: #727386;
+        }
+        body.dark .btn:hover {
+            background-color: #a6a5b7;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <button id="light" class="theme">light</button>
+        <button id="dark" class="theme">dark</button>
+    </div>
+    <div class="content">
+        <h2>Your result:</h2>
+        <h1 id="result"></h1>
+        <a class="btn" href="index.html">Back to main page</a>
+    </div>
+</div>
+<script>
+    document.getElementById('result').innerText = localStorage.getItem('result');
+
+    if (localStorage.getItem("theme")) {
+        document.body.classList.add(localStorage.getItem("theme"));
+    }
+
+    let dark = document.getElementById("dark");
+    let light = document.getElementById("light");
+
+    dark.onclick = function() {
+        document.body.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+    }
+    light.onclick = function() {
+        document.body.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+    }
+</script>
+</body>
+</html>

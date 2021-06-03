@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /* Body */
+        body {
+            font-family: Arial;
+            margin: 0;
+        }
+        body.dark {
+            background-color: #30333b;
+        }
+        /* Page */
+        .page {
+            width: 1200px;
+            height: 100vh;
+            margin: auto;
+        }
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .theme {
+            background-color: inherit;
+            border: none;
+            padding: 0;
+            outline: none;
+            margin-left: 40px;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #727386;
+        }
+        .theme:first-child {
+            margin-left: 0;
+        }
+        .theme:hover {
+            color: #43699d;
+            box-shadow: 0 5px 0 #abc5f1;
+        }
+        body.dark .theme:hover {
+            color: #a6a5b7;
+            box-shadow: 0 5px 0 #a6a5b7;
+        }
+        /* Content */
+        .content {
+            text-align: center;
+            width: 100%;
+            position: relative;
+            top: 38%;
+            transform: translateY(-50%);
+        }
+        .intro {
+            margin-bottom: 70px;
+
+            font-size: 60px;
+            color: #a6a5b7;
+            font-weight: bold;
+        }
+        body.dark .intro {
+            color: #d3ddf0;
+        }
+        .parts {
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .parts_intro {
+            margin-bottom: 20px;
+
+            font-size: 30px;
+            font-weight: bolder;
+            text-transform: uppercase;
+            color: #584e9d;
+        }
+        body.dark .parts_intro {
+            color: #86a2db;
+        }
+        .btn {
+            display: block;
+            padding: 15px 90px;
+            border-radius: 1px;
+            margin: 20px 30px;
+
+            text-decoration: none;
+            text-transform: uppercase;
+            color: #a575ba;
+            font-weight: normal;
+            font-size: 24px;
+
+            background-color: #cce6ff;
+        }
+        body.dark .btn{
+            background-color: #626678;
+            color: #c0c3cf;
+        }
+        .btn:hover {
+            background-color: #abc5f1;
+        }
+        body.dark .btn:hover {
+            background-color: #4e567a;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="header">
+        <button id="light" class="theme">light</button>
+        <button id="dark" class="theme">dark</button>
+    </div>
+    <div class="content">
+        <h1 class="intro">Choose option for training</h1>
+        <div id="options" class="parts">
+            <div class="parts_item">
+                <h2 class="parts_intro">Part 1</h2>
+                <a class="btn" data-option="t_1" href="active.html">write by translation</a>
+                <a class="btn" data-option="m_1" href="active.html">choose meanings</a>
+                <a class="btn" data-option="w_1" href="active.html">write by meaning</a>
+            </div>
+            <div class="parts_item">
+                <h2 class="parts_intro">Part 2</h2>
+                <a class="btn" data-option="t_2" href="active.html">write by translation</a>
+                <a class="btn" data-option="m_2" href="active.html">choose meanings</a>
+                <a class="btn" data-option="w_2" href="active.html">write by meaning</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    if (localStorage.getItem("theme")) {
+        document.body.classList.add(localStorage.getItem("theme"));
+    }
+
+    let dark = document.getElementById("dark");
+    let light = document.getElementById("light");
+    let options = document.getElementById("options");
+
+    dark.onclick = function() {
+        document.body.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+    }
+    light.onclick = function() {
+        document.body.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+    }
+    options.onclick = function(event) {
+        if (event.target.closest('.btn')) {
+            localStorage.setItem("option", event.target.dataset.option);
+        }
+    }
+</script>
+</body>
+</html>

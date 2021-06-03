@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+        body.dark {
+            background-color: #30333b;
+        }
+        /* Header */
+        .header {
+            display: flex;
+            align-self: flex-end;
+        }
+        .theme {
+            background-color: inherit;
+            border: none;
+            padding: 0;
+            outline: none;
+            margin-left: 40px;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #727386;
+        }
+        .theme:first-child {
+            margin-left: 0;
+        }
+        .theme:hover {
+            color: #43699d;
+            box-shadow: 0 5px 0 #abc5f1;
+        }
+        body.dark .theme:hover {
+            color: #a6a5b7;
+            box-shadow: 0 5px 0 #a6a5b7;
+        }
+        /* Container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            max-width: 1000px;
+            margin: auto;
+            height: 100vh;
+        }
+        .instruction {
+            flex-grow: 1;
+
+            padding-top: 40px;
+            font-size: 30px;
+            font-weight: normal;
+            color: #626678;
+        }
+        body.dark .instruction{
+            color: #9da1b3;
+        }
+        /* Content */
+        .content {
+            flex-grow: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .task {
+            text-align: center;
+            font-size: 54px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #a94ca5;
+        }
+        body.dark .task {
+            color: #a990ad;
+        }
+        .answer {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .answer input{
+            width: 35px;
+            height: 35px;
+        }
+        .answer label{
+            margin-left: 30px;
+            font-size: 34px;
+            cursor: inherit;
+        }
+        body.dark .answer label {
+            color: #d5e3f7;
+        }
+        .user-answer {
+            display: flex;
+            align-items: center;
+        }
+        .user-answer span {
+            margin-right: 20px;
+            font-size: 40px;
+            font-weight: bold;
+            color: #4b439d;
+        }
+        body.dark .user-answer span {
+            color: #97b3ce;
+        }
+        .user-answer input {
+            width: 500px;
+            height: 40px;
+            border: 1px solid #bcbec2;
+            font-size: 27px;
+        }
+        body.dark .user-answer input {
+            background-color: #9da1b3;
+        }
+        .user-answer input:focus {
+            outline: 2px solid #86a2db;
+        }
+        body.dark .user-answer input:focus {
+            outline: none;
+            background-color: #fff;
+        }
+        .comment {
+            position: absolute;
+            bottom: 0;
+            width: 100vw;
+            padding: 10px 0;
+            background-color: rgba(64, 154, 207, 0.8);
+
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+        }
+        .number {
+            color: #727386;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <button id="light" class="theme">light</button>
+        <button id="dark" class="theme">dark</button>
+    </div>
+    <h2 class="instruction">Choose correct answer for the question</h2>
+    <h3 id="number" class="number"><span></span>/20</h3>
+    <div id="content" class="content">
+        <h1 id="task" class="task"></h1>
+        <p id="a_1" class="user-answer"><span>V1:</span><input type="text"></p>
+        <p id="a_2" class="user-answer"><span>V2:</span><input type="text"></p>
+        <p id="a_3" class="user-answer"><span>V3:</span><input type="text"></p>
+    </div>
+</div>
+<div id="comment" class="comment"></div>
+<script>
+    if (localStorage.getItem("theme")) {
+        document.body.classList.add(localStorage.getItem("theme"));
+    }
+
+    let dark = document.getElementById("dark");
+    let light = document.getElementById("light");
+
+    dark.onclick = function() {
+        document.body.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+    }
+    light.onclick = function() {
+        document.body.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+    }
+    let comment = document.getElementById('comment');
+    comment.style.backgroundColor = 'inherit';
+</script>
+<script src="action.js"></script>
+</body>
+</html>
